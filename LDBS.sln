@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDBS", "LDBS\LDBS.csproj", "{2115DC2A-C6A2-4C7E-B950-6B1E44D62735}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2115DC2A-C6A2-4C7E-B950-6B1E44D62735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2115DC2A-C6A2-4C7E-B950-6B1E44D62735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2115DC2A-C6A2-4C7E-B950-6B1E44D62735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2115DC2A-C6A2-4C7E-B950-6B1E44D62735}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11E435B1-73CB-4549-85D6-98C84C68FF63}
+	EndGlobalSection
+EndGlobal
