@@ -6,38 +6,42 @@
 <div class="container body-content">
 
     <div style="text-align: center; ">
-        <h1>Life and Death Book</h1>
         <br />
-        <br />
-        <table style="margin-left: auto; margin-right: auto;">
-            <tr style="height:40px" ; align="center" valign="middle">
-                <td style="font-size:20px">
-                    帳號 &nbsp;
-                </td>
-                <td>
-                    <input type="text" name="account">
-                </td>
-            </tr>
-            <tr style="height:40px" ; align="center" valign=" middle">
-                <td style="font-size:20px">
-                    密碼 &nbsp;
-                </td>
-                <td>
-                    <input type="password" name="password">
-                </td>
-            </tr>
-        </table>
+        <div class="panel panel-default" style="width:500px; height:300px; margin:auto">
+            <h1>Life and Death Book</h1>
+            <br />
+            <br />
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr style="height:40px" ; align="center" valign="middle">
+                    <td style="font-size:20px">
+                        帳號 &nbsp;
+                    </td>
+                    <td>
+                        <input type="text" name="account">
+                    </td>
+                </tr>
+                <tr style="height:40px" ; align="center" valign=" middle">
+                    <td style="font-size:20px">
+                        密碼 &nbsp;
+                    </td>
+                    <td>
+                        <input type="password" name="password">
+                    </td>
+                </tr>
+            </table>
 
-        <br />
-        <button type="button">登入</button>
-        <br />
-        <br />
-        <table style="margin-left: auto; margin-right: auto;">
-            <tr>
-                <td style="width:100px" ; align="center" valign="middle">忘記密碼</td>
-                <td style="width:100px" ; align="center" valign="middle">@Html.ActionLink("註冊帳號", "Register", "Member")</td>
-            </tr>
-        </table>
+            <br />
+            <button type="button">登入</button>
+            <br />
+            <br />
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <td style="width:100px" ; align="center" valign="middle">忘記密碼</td>
+                    <td style="width:100px" ; align="center" valign="middle">@Html.ActionLink("註冊帳號", "Register", "Member")</td>
+                </tr>
+            </table>
+            <br />
+        </div>
     </div>
 
 </div>
