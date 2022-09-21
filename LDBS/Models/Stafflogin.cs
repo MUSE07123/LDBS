@@ -86,7 +86,7 @@ namespace LDBS.Models
             }
         }
         /// <summary>
-        /// 檢查員工密碼(如果正確則跳轉) //未測試
+        /// 檢查員工密碼(如果正確則成功登入) 
         /// </summary>
         public bool ＵserPassword_check(string StaffNumber,string Password) {
             

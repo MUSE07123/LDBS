@@ -30,7 +30,7 @@ namespace LDBS.Controllers
 
 
 
-        //test1
+        
         #region 變數宣告
         private Stafflogin Stafflogin = new Stafflogin();
         #endregion
