@@ -1,0 +1,43 @@
+﻿@using LDBS.Models;
+@{
+    ViewBag.Title = "DeathRoster";
+    List<DeathRosterSQL> deathRosterList = ViewBag.deathRosterlist;
+}
+
+<h2>DeathRoster</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>序號</th>
+            <th>身分證</th>
+            <th>姓名</th>
+            <th>性別</th>
+            <th>年齡(享年)</th>
+            <th>死亡原因</th>
+            <th>出生日期</th>
+            <th>死亡日期</th>
+            <th>死亡地點</th>
+            <th>狀態</th>
+            <th>備註</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DeathRosterSQL deathRosterSQL in deathRosterList)
+        {
+            <tr>
+                <th>@deathRosterSQL.ROWID</th>
+                <th>@deathRosterSQL.ID</th>
+                <th>@deathRosterSQL.Name</th>
+                <th>@deathRosterSQL.Gender</th>
+                <th>@deathRosterSQL.Age</th>
+                <th>@deathRosterSQL.Death_cause</th>
+                <th>@(@deathRosterSQL.Birth_Date.ToString("yyyy/MM/dd HH:mm:ss"))</th>
+                <th>@(@deathRosterSQL.Death_Date.ToString("yyyy/MM/dd HH:mm:ss"))</th>
+                <th>@deathRosterSQL.Drath_location</th>
+                <th>@deathRosterSQL.State</th>
+                <th>@deathRosterSQL.Remark</th>
+            </tr>
+        }
+    </tbody>
+</table>

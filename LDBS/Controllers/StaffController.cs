@@ -25,5 +25,14 @@ namespace LDBS.Controllers
 
             return View();
         }
+
+        public ActionResult DeathRoster()
+        {
+            DeathRosterSQL deathRosterSQL = new DeathRosterSQL();
+            List<DeathRosterSQL> deathRosterSQLlist = deathRosterSQL.GetDeathRosterSQL();
+            ViewBag.deathRosterlist = deathRosterSQLlist;
+
+            return View();
+        }
     }
 }
