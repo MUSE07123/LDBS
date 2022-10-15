@@ -10,7 +10,6 @@ using LDBS.Models;
 
 namespace LDBS.Controllers
 {
-    
     public class MemberController : Controller
     {
         // GET: Member
@@ -32,7 +31,7 @@ namespace LDBS.Controllers
         #region 變數宣告
         private StaffloginCheck StaffloginCheck = new StaffloginCheck();
         #endregion
-        
+
         public ActionResult Stafflogin()
         {
             //輸入的帳號密碼
@@ -59,6 +58,7 @@ namespace LDBS.Controllers
                             {
                                 ViewBag.Msg = "";
                                 ViewBag.Account = StaffAccount;
+                                //頁面跳到Staff的Index
 
                                 //驗證通過，建立一張 ticket
                                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
