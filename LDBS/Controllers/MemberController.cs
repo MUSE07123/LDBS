@@ -57,6 +57,7 @@ namespace LDBS.Controllers
                             {
                                 ViewBag.Msg = "";
                                 ViewBag.Account = StaffAccount;
+                                //頁面跳到Staff的Index
                                 return RedirectToAction("Index", "Staff");
                             }
                             else
