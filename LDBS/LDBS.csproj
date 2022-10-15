@@ -122,11 +122,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\MemberSettingController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\StaffloginCheck.cs" />
+    <Compile Include="Models\StaffSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +172,7 @@
     <Content Include="Views\Member\Stafflogin.cshtml" />
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Shared\_StaffLayout.cshtml" />
+    <Content Include="Views\MemberSetting\MemberSetting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

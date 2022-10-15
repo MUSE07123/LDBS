@@ -1,0 +1,102 @@
+﻿<div id="VuePage">
+    <!--使用 Bootstrap 設計註冊表單-->
+    <div class="container body-content">
+        <div style="text-align: center; ">
+            <br />
+            <div class="panel panel-info" style="width:500px; height:300px; margin:auto">
+                <div class="panel-heading"><h4>權限設定</h4></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>姓名</label>
+                        <input type="text" class="form-control" v-model="form.UserName"> 
+                    </div>
+                    <div class="form-group">
+                        <label>帳號</label>
+                        <input type="text" class="form-control" v-model="form.StaffNumber">
+                    </div>
+                    <div class="form-group">
+                        <label>密碼</label>
+                        <input type="password" class="form-control" v-model="form.UserPassword">
+                    </div>
+                    <div class="form-group">
+                        <label>再次密碼</label>
+                        <input type="password" class="form-control" v-model="form.UserPassword2">
+                    </div>
+                    <div class="form-group" style="margin-left:-10px">
+                        <label>Email</label>
+                        <input type="text" class="form-control" v-model="form.Email">
+                    </div>
+                    <div class="form-group">
+                        <label>職稱</label>
+                        <select v-model="form.Titile">
+                            <option value = "基礎員工">基礎員工</option>
+                            <option value = "高級員工">高級員工</option>
+                            <option value = "主管">主管</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>權限</label>
+                        <select v-model="form.Permission">
+                            <option value = "小" >小</option>
+                            <option value = "中" >中</option>
+                            <option value = "大" >大</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" v-on:click="DoMemberSetting()">註冊</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script>
+        var VuePage = new Vue({
+            el: '#VuePage'
+            , data: function () {
+                var data = {
+                    form:
+                    {
+                        Titile:'基礎員工',
+                        Permission: '小'
+                    }  
+                };
+                return data;
+            }
+            , methods: {
+                // 執行註冊按鈕
+                DoMemberSetting: function () {
+                    var self = this;
+
+                    // 組合表單資料
+                    var postData = {};
+                    postData['UserName'] = self.form.UserName;
+                    postData['StaffNumber'] = self.form.StaffNumber;
+                    postData['UserPassword'] = self.form.UserPassword;
+                    postData['UserPassword2'] = self.form.UserPassword2;
+                    postData['Email'] = self.form.Email;
+                    postData['Titile'] = self.form.Titile;
+                    postData['Permission'] = self.form.Permission;
+
+                    // 使用 jQuery Ajax 傳送至後端
+                    $.ajax({
+                        url:'@Url.Content("~/MemberSetting/DoMemberSetting")',
+                        method:'POST',
+                        dataType:'json',
+                        data: { inModel: postData },
+                        success: function (datas) {
+                            if (datas.ErrMsg) {
+                                alert(datas.ErrMsg);
+                                return;
+                            }
+                            alert(datas.ResultMsg);
+                        },
+                        error: function (err) {
+                            $('#ErrorMsg').html(err.responseText);
+                            $('#ErrorAlert').modal('toggle');
+                        },
+                    });
+                }
+            }
+        })
+    </script>
+}
