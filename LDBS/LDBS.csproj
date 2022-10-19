@@ -172,6 +172,8 @@
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Shared\_StaffLayout.cshtml" />
     <Content Include="Views\Staff\DeathRoster.cshtml" />
+    <Content Include="Views\Staff\PermissionList.cshtml" />
+    <Content Include="Views\Staff\PermissionSetting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
