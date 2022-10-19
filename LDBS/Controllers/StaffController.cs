@@ -34,5 +34,19 @@ namespace LDBS.Controllers
 
             return View();
         }
+
+        public ActionResult PermissionList()
+        {
+
+
+            return View();
+        }
+
+        public ActionResult PermissionSetting()
+        {
+
+
+            return View();
+        }
     }
 }
