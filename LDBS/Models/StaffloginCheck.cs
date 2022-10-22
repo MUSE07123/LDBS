@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Configuration;
 
 namespace LDBS.Models
 {
@@ -41,7 +42,8 @@ namespace LDBS.Models
                 //1.新建連接對象
                 SqlConnection connection = new SqlConnection();
                 //2.連接字串
-                connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
+                //connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["LDBSDB"].ConnectionString;
                 connection.Open(); //開資料庫
                 if (connection.State == ConnectionState.Open)
                 {
@@ -98,7 +100,8 @@ namespace LDBS.Models
                 //1.新建連接對象
                 SqlConnection connection = new SqlConnection();
                 //2.連接字串
-                connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
+                //connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["LDBSDB"].ConnectionString;
                 connection.Open(); //開資料庫
                 strSQL = "";
                 strSQL += "select StaffNumber,UserPassword from LDBS_StaffLogin where StaffNumber = @StaffNumber and UserPassword  = @Password";
