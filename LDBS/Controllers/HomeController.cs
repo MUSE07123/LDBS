@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LDBS.Controllers
 {
+    
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -19,7 +20,7 @@ namespace LDBS.Controllers
 
             return View();
         }
-
+        
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
