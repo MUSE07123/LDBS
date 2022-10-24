@@ -44,6 +44,7 @@ namespace LDBS.Models
                 //2.連接字串
                 //connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
                 connection.ConnectionString = ConfigurationManager.ConnectionStrings["LDBSDB"].ConnectionString;
+                //connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
                 connection.Open(); //開資料庫
                 if (connection.State == ConnectionState.Open)
                 {
