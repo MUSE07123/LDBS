@@ -10,7 +10,6 @@ using LDBS.Models;
 
 namespace LDBS.Controllers
 {
-    
     public class MemberController : Controller
     {
         // GET: Member
@@ -59,6 +58,7 @@ namespace LDBS.Controllers
                             {
                                 ViewBag.Msg = "";
                                 ViewBag.Account = StaffAccount;
+                                TempData["str"] = StaffAccount;//傳值到登入後頁面
 
                                 //驗證通過，建立一張 ticket
                                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(

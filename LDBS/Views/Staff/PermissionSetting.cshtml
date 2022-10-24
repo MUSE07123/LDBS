@@ -5,3 +5,105 @@
 
 <h2>PermissionSetting</h2>
 
+<div id="VuePage">
+    <!--使用 Bootstrap 設計註冊表單-->
+    <div class="container body-content">
+        <div style="text-align: center; ">
+            <br />
+            <div class="panel panel-info" style="width:500px; height:330px; margin:auto">
+                <div class="panel-heading"><h4>權限設定</h4></div>
+                <div class="panel-body">
+                    <div style="float: left; margin-left: 65px; padding-top: 6px;"><label>姓名 &nbsp;&nbsp;</label></div>
+                    <div><input type="text" class="form-control" v-model="form.UserName"></div>
+                    <br>
+                    <div style="float: left; margin-left: 65px; padding-top: 6px;"><label>帳號 &nbsp;&nbsp;</label></div>
+                    <div><input type="text" class="form-control" v-model="form.StaffNumber"></div>
+                    <br>
+                    <div style="float: left; margin-left: 65px; padding-top: 6px;"><label>Mail &nbsp;&nbsp;</label></div>
+                    <div><input type="text" class="form-control" v-model="form.Email"></div>
+                    <br>
+                    <div style="float:left; margin-left: 65px;"><label>職稱 &nbsp;&nbsp;</label></div>
+                    <div style="width:auto; height: auto; float: left;">
+                        <select v-model="form.Titile">
+                            <option value="基礎員工">基礎員工</option>
+                            <option value="高級員工">高級員工</option>
+                            <option value="主管">主管</option>
+                        </select>
+                    </div>
+                    <div style="width: auto; height: auto; float: left; display: inline; margin-left: 65px;"><label>權限 &nbsp;&nbsp;</label></div>
+                    <div style="float: left;">
+                        <select v-model="form.Permission">
+                            <option value="小">小</option>
+                            <option value="中">中</option>
+                            <option value="大">大</option>
+                        </select>
+                    </div>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-primary" v-on:click="DoMemberSetting()">註冊</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script>
+        var VuePage = new Vue
+        ({
+            el: '#VuePage',
+            data: function ()
+            {
+                var data = {
+                    form:
+                    {   //下拉選單預設
+                        Titile:'基礎員工',
+                        Permission: '小'
+                    }
+                };
+                return data;
+            },
+            methods:
+            {
+                // 執行按鈕
+                DoMemberSetting: function ()
+                {
+                    var self = this;
+
+                    // 組合表單資料
+                    var postData = {};
+                    postData['UserName'] = self.form.UserName;
+                    postData['StaffNumber'] = self.form.StaffNumber;
+                    postData['Email'] = self.form.Email;
+                    postData['Titile'] = self.form.Titile;
+                    postData['Permission'] = self.form.Permission;
+
+                    // 使用 jQuery Ajax 傳送至後端
+                    $.ajax
+                    ({
+                        url:'@Url.Content("~/MemberSetting/DoMemberSetting")', //呼叫Controllers：MemberSetting的類別DoMemberSetting
+                        method:'POST',
+                        dataType:'json',
+                        data: { inModel: postData },
+                        success: function (datas)
+                        {
+                            if (datas.ErrMsg)
+                            {
+                                alert(datas.ErrMsg);
+                                return;
+                            }
+                            alert(datas.ResultMsg);
+                            window.location.href = '@Url.Action("Stafflogin", "Member")';//成功後跳轉網頁
+                        },
+                        error: function (err)
+                        {
+                            //$('#ErrorMsg').html(err.responseText);
+                            //$('#ErrorAlert').modal('toggle');
+                        },
+                    });
+                }
+            }
+        })
+    </script>
+}
+
+
