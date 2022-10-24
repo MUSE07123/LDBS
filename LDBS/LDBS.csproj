@@ -173,6 +173,7 @@
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Shared\_StaffLayout.cshtml" />
     <Content Include="Views\MemberSetting\MemberSetting.cshtml" />
+    <Content Include="Views\Member\Administrator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

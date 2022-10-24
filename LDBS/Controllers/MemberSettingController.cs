@@ -18,6 +18,7 @@ namespace LDBS.Controllers
 {
     public class MemberSettingController : Controller
     {
+        string strNum = "Aa";//預設密碼開頭
         // GET: MemberSetting
         public ActionResult Index()
         {
@@ -32,21 +33,17 @@ namespace LDBS.Controllers
         #endregion
 
         #region 權限設定
-        public ActionResult DoMemberSetting(DoSettingIn inModel) //Models：StaffSetting裡的類別DoSettingIn及DoSettingrOut
+        public ActionResult DoMemberSetting(DoSettingIn inModel) //宣告Models：StaffSetting裡的類別DoSettingIn及DoSettingrOut
         {
             DoSettingrOut outModel = new DoSettingrOut();
 
-            if (string.IsNullOrEmpty(inModel.UserName) || string.IsNullOrEmpty(inModel.StaffNumber) || string.IsNullOrEmpty(inModel.UserPassword) || string.IsNullOrEmpty(inModel.UserPassword2) || string.IsNullOrEmpty(inModel.Email))
+            if (string.IsNullOrEmpty(inModel.UserName) || string.IsNullOrEmpty(inModel.StaffNumber) || string.IsNullOrEmpty(inModel.Email))
             {
                 outModel.ErrMsg = "請輸入資料";
             }
             else if (!Regex.IsMatch(inModel.StaffNumber, @"^[0-9]{10}$"))
             {
                 outModel.ErrMsg = "帳號請輸入數字10碼";
-            }
-            else if (inModel.UserPassword != inModel.UserPassword2)
-            {
-                outModel.ErrMsg = "密碼不一致，請重新輸入!";
             }
             else if (!Regex.IsMatch(inModel.Email, @"^[a-zA-Z0-9]{3,20}@[a-zA-Z0-9]{2,10}.[a-zA-Z0-9]{2,10}.?[a-zA-Z0-9]{1,5}$"))
             {
@@ -91,7 +88,7 @@ namespace LDBS.Controllers
                     }
                     else
                     {
-                        // 註冊資料新增至資料庫
+                        // 異動資料至資料庫
                         sql = @"INSERT INTO LDBS_StaffLogin (StaffNumber, UserName,Titile,UserPassword,Email,Permission)
                                 VALUES (@StaffNumber,@UserName,@Titile,@UserPassword,@Email,@Permission)";
                         cmd = new SqlCommand();
@@ -101,13 +98,13 @@ namespace LDBS.Controllers
                         // 使用參數化填值
                         cmd.Parameters.AddWithValue("@StaffNumber", inModel.StaffNumber);
                         cmd.Parameters.AddWithValue("@UserName", inModel.UserName);
-                        cmd.Parameters.AddWithValue("@UserPassword", inModel.UserPassword);
+                        cmd.Parameters.AddWithValue("@UserPassword", strNum + inModel.StaffNumber); //密碼預設Aa+員編(帳號)
                         cmd.Parameters.AddWithValue("@Email", inModel.Email);
                         cmd.Parameters.AddWithValue("@Titile", inModel.Titile);
                         cmd.Parameters.AddWithValue("@Permission", inModel.Permission);
 
                         // 執行資料庫更新動作
-                        cmd.ExecuteNonQuery(); //新增資料至DB一定要加
+                        cmd.ExecuteNonQuery(); //異動到資料庫一定要加
 
                         outModel.ResultMsg = "註冊完成";
                     }
@@ -133,5 +130,6 @@ namespace LDBS.Controllers
             return resultJson;
         }
         #endregion
+
     }
 }
