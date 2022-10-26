@@ -80,7 +80,7 @@
                     // 使用 jQuery Ajax 傳送至後端
                     $.ajax
                     ({
-                        url:'@Url.Content("~/Staff/DoPermissionSetting")', //呼叫Controllers：Staff的類別DoPermissionSetting
+                        url:'@Url.Content("~/Staff/DoPermissionSetting")', //呼叫Controllers裡的Function
                         method:'POST',
                         dataType:'json',
                         data: { inModel: postData },
@@ -92,7 +92,7 @@
                                 return;
                             }
                             alert(datas.ResultMsg);
-                            window.location.href = '@Url.Action("Stafflogin", "Member")';//成功後跳轉網頁
+                            window.location.href = '@Url.Action("PermissionList", "Staff")';//成功後跳轉網頁
                         },
                         error: function (err)
                         {

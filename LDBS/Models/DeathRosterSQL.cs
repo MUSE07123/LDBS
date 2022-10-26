@@ -20,6 +20,7 @@ namespace LDBS.Models
         public string State { get; set; } //狀態
         public string Remark { get; set; } //備註
 
+        #region 讀取死亡名冊資料
         public List<DeathRosterSQL> GetDeathRosterSQL()
         {
             List<DeathRosterSQL> DeathRosterlist = new List<DeathRosterSQL>();
@@ -65,5 +66,6 @@ namespace LDBS.Models
 
             return DeathRosterlist;
         }
+        #endregion
     }
 }

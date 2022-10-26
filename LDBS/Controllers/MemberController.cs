@@ -28,42 +28,42 @@ namespace LDBS.Controllers
             return View();
         }
 
-        #region 變數宣告
-        private StaffloginCheck StaffloginCheck = new StaffloginCheck();
-        #endregion
+        //變數宣告
+        private StaffDataCheck StaffloginCheck = new StaffDataCheck();
         
+        #region 管理員登入畫面
         public ActionResult Stafflogin()
         {
             //輸入的帳號密碼
-            string StaffAccount = Request.Form["StaffAccount"];
-            string StaffPassword = Request.Form["StaffPassword"];
+            string StaffNumber = Request.Form["StaffNumber"];
+            string UserPassword = Request.Form["UserPassword"];
             //1110831001  00000001
             try
             {  //檢查輸入欄位是否有空值
-                if (StaffAccount == null || StaffPassword == null) { }
+                if (StaffNumber == null || UserPassword == null) { }
                 else
                 {
-                    if (StaffAccount == "" || StaffPassword == "")
+                    if (StaffNumber == "" || UserPassword == "")
                     {
                         ViewBag.msg = "請輸入帳號密碼！";
                     }
                     else
                     {
                         //檢查帳號是否正確
-                        if (StaffloginCheck.StaffNumber_Check(StaffAccount) == true)
+                        if (StaffloginCheck.StaffNumber_Check(StaffNumber) == true)
                         {
                             ViewBag.Msg = "";
                             //檢查密碼是否正確
-                            if (StaffloginCheck.UserPassword_check(StaffAccount, StaffPassword) == true)
+                            if (StaffloginCheck.UserPassword_check(StaffNumber, UserPassword) == true)
                             {
                                 ViewBag.Msg = "";
-                                ViewBag.Account = StaffAccount;
-                                TempData["str"] = StaffAccount;//傳值到登入後頁面
+                                ViewBag.Account = StaffNumber;
+                                TempData["str"] = StaffNumber;//傳值到登入後頁面
 
                                 //驗證通過，建立一張 ticket
                                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
                                     1,                                  //票證的版本號碼  
-                                    StaffAccount,                       //使用者名稱
+                                    StaffNumber,                       //使用者名稱
                                     DateTime.Now,                       //票證發行時間
                                     DateTime.Now.AddMinutes(3),         //票證有效時間(登入內時間)
                                     false,                              //如果票證將存放於持續性Cookie中，則為true
@@ -80,7 +80,7 @@ namespace LDBS.Controllers
                                 //cookie 寫入 response
                                 Response.Cookies.Add(httpCookie);
 
-                                //FormsAuthentication.SetAuthCookie(StaffAccount, false);
+                                //FormsAuthentication.SetAuthCookie(StaffNumber, false);
 
                                 //登入成功
                                 return RedirectToAction("Index", "Staff");
@@ -91,8 +91,7 @@ namespace LDBS.Controllers
                             }
                         }
                         else
-                        {
-                            //回傳帳號錯誤
+                        {   //回傳帳號錯誤
                             ViewBag.Msg = "此帳號不存在！";
                         }
                     }
@@ -105,5 +104,6 @@ namespace LDBS.Controllers
 
             return View();
         }
+        #endregion
     }
 }

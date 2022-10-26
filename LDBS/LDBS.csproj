@@ -127,8 +127,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DeathRosterSQL.cs" />
-    <Compile Include="Models\StaffloginCheck.cs" />
-    <Compile Include="Models\StaffSetting.cs" />
+    <Compile Include="Models\StaffDataCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

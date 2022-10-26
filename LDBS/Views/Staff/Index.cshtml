@@ -1,57 +1,35 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
 <h2>Staff Index.......</h2>
 <br />
 
-
-
 @using (Html.BeginForm("Index", "Staff", FormMethod.Post))
 {
-
-
     <input type="submit" value="登出" />
-
-
 }
 
+@*第一次登入請重設密碼，還未加入判斷是否第一次*@
 <h2>Staff Index</h2>
-@*<div class="container">
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#form">
-            See Modal with Form
-        </button>
-    </div>*@
-
-@*<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">*@
-@*<div class="modal-dialog modal-dialog-centered" role="document">*@
 <div id="VuePage">
     <div class="modal-content">
         <div class="modal-header border-bottom-0">
             <h5 class="modal-title" id="exampleModalLabel">您好！@TempData["str"]，第一次登入請重設密碼。</h5>
-            @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>*@
         </div>
-        @*<form>*@
         <div class="modal-body">
             <div style="float: left; margin-left: 65px; padding-top: 6px;"><label>密碼 &nbsp;&nbsp;</label></div>
-            <div><input type="text" class="form-control" v-model="form.UserPassword"></div>
+            <div><input type="password" class="form-control" v-model="form.UserPassword"></div>
             <br>
             <div style="float:left; margin-left: 65px;"><label>再次 &nbsp;&nbsp;<br>密碼 &nbsp;&nbsp;</label></div>
-            <div><input type="text" class="form-control" v-model="form.UserPassword2"></div>
+            <div><input type="password" class="form-control" v-model="form.UserPassword2"></div>
             <br>
         </div>
         <div class="modal-footer border-top-0 d-flex justify-content-center">
             <button type="submit" class="btn btn-success" 　v-on:click="DoMemberOneLogin()">確定</button>
         </div>
-        @*</form>*@
     </div>
 </div>
-@*</div>*@
-@*</div>*@
-
 @section scripts {
     <script>
     var VuePage = new Vue
@@ -82,7 +60,7 @@
                 // 使用 jQuery Ajax 傳送至後端
                 $.ajax
                 ({
-                    url:'@Url.Content("~/Staff/DoMemberOneLogin")', //呼叫Controllers：MemberSetting的類別DoMemberOneLogin
+                    url:'@Url.Content("~/Staff/DoMemberOneLogin")', //呼叫Controllers裡的Function
                     method:'POST',
                     dataType:'json',
                     data: { inModel: postData },

@@ -8,33 +8,29 @@ using System.Configuration;
 
 namespace LDBS.Models
 {
-    public class StaffloginCheck
+    public class StaffDataCheck
     {
         private string strSQL = "";  //SQL指令
-        /// <summary>
-        /// 登入參數
-        /// </summary>
-        public class DoLoginIn
+        public class DoStaffDataIn
         {
-            public string StaffAccount { get; set; }
-            public string StaffPassword { get; set; }
+            public string StaffNumber { get; set; }
+            public string UserName { get; set; }
+            public string Titile { get; set; }
+            public string UserPassword { get; set; }
+            public string UserPassword2 { get; set; }
+            public string Email { get; set; }
+            public string Permission { get; set; }
         }
-        /// <summary>
-        /// 登入回傳
-        /// </summary>
-        /// 
-        public class DoLoginOut
+
+        public class DoStaffDataOut
         {
             public string ErrMsg { get; set; }
             public string ResultMsg { get; set; }
         }
 
-        /// <summary>
-        /// 檢查員工帳號
-        /// </summary>
+        #region 檢查員工帳號
         public bool StaffNumber_Check(string StaffNumber)
         {
-
             bool boolretuen;
 
             try
@@ -44,7 +40,6 @@ namespace LDBS.Models
                 //2.連接字串
                 //connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
                 connection.ConnectionString = ConfigurationManager.ConnectionStrings["LDBSDB"].ConnectionString;
-                //connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
                 connection.Open(); //開資料庫
                 if (connection.State == ConnectionState.Open)
                 {
@@ -89,10 +84,10 @@ namespace LDBS.Models
                 throw (new Exception(ex.Message));
             }
         }
-        /// <summary>
-        /// 檢查員工密碼(如果正確則跳轉) //未測試
-        /// </summary>
-        public bool UserPassword_check(string StaffNumber, string Password)
+        #endregion
+
+        #region 檢查員工密碼(如果正確則跳轉) //未測試
+        public bool UserPassword_check(string StaffNumber, string UserPassword)
         {
 
             bool boolretuen;
@@ -105,14 +100,14 @@ namespace LDBS.Models
                 connection.ConnectionString = ConfigurationManager.ConnectionStrings["LDBSDB"].ConnectionString;
                 connection.Open(); //開資料庫
                 strSQL = "";
-                strSQL += "select StaffNumber,UserPassword from LDBS_StaffLogin where StaffNumber = @StaffNumber and UserPassword  = @Password";
+                strSQL += "select StaffNumber,UserPassword from LDBS_StaffLogin where StaffNumber = @StaffNumber and UserPassword  = @UserPassword";
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = strSQL;
                 cmd.Connection = connection;
                 // 使用參數化填值
                 cmd.Parameters.AddWithValue("@StaffNumber", StaffNumber);
-                cmd.Parameters.AddWithValue("@Password", Password);
+                cmd.Parameters.AddWithValue("@UserPassword", UserPassword);
 
                 // 執行資料庫查詢動作
                 SqlDataAdapter da = new SqlDataAdapter(cmd);      //查詢資料
@@ -134,8 +129,7 @@ namespace LDBS.Models
             {
                 throw (new Exception(ex.Message));
             }
-
-
         }
+        #endregion
     }
 }

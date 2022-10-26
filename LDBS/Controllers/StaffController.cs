@@ -9,17 +9,17 @@ using System.Web.Mvc;
 using System.Web.Configuration;
 using System.Data.Common;
 using System.Text.RegularExpressions;
-using static LDBS.Models.StaffSetting;
 using LDBS.Models;
 using Microsoft.Ajax.Utilities;
 using System.Collections;
 using System.Web.Security;  //驗證登入狀態需引入
+using static LDBS.Models.StaffDataCheck;
 
 namespace LDBS.Controllers
 {
-    
     public class StaffController : Controller
     {
+        private string strNum = "Aa";//預設密碼開頭
         // GET: Staff
         [Authorize]  //驗證測試     
         public ActionResult Index()
@@ -38,9 +38,9 @@ namespace LDBS.Controllers
 
         //POST: Staff
         #region 第一次登入重設密碼 
-        public ActionResult DoMemberOneLogin(DoSettingIn inModel) //宣告Models：StaffSetting裡的類別DoSettingIn及DoSettingrOut
+        public ActionResult DoMemberOneLogin(DoStaffDataIn inModel) 
         {
-            DoSettingrOut outModel = new DoSettingrOut();
+            DoStaffDataOut outModel = new DoStaffDataOut();
 
             if (string.IsNullOrEmpty(inModel.UserPassword) || string.IsNullOrEmpty(inModel.UserPassword2))
             {
@@ -53,6 +53,10 @@ namespace LDBS.Controllers
             else if (inModel.UserPassword == strNum + inModel.StaffNumber)
             {
                 outModel.ErrMsg = "不可輸入預設密碼!";
+            }
+            else if (!Regex.IsMatch(inModel.UserPassword, @"^[a-zA-Z0-9]{6,20}$"))
+            {
+                outModel.ErrMsg = "密碼請輸入至少6~20碼!";
             }
             else
             {
@@ -105,6 +109,7 @@ namespace LDBS.Controllers
         }
         #endregion
 
+        #region 死亡名冊
         public ActionResult DeathRoster()
         {
             DeathRosterSQL deathRosterSQL = new DeathRosterSQL();
@@ -113,15 +118,16 @@ namespace LDBS.Controllers
 
             return View();
         }
+        #endregion
 
+        #region 權限名單
         public ActionResult PermissionList()
         {
 
 
             return View();
         }
-
-        string strNum = "Aa";//預設密碼開頭
+        #endregion
 
         // GET: PermissionSetting
         #region 權限設定頁面載入動作
@@ -132,10 +138,10 @@ namespace LDBS.Controllers
         #endregion
 
         // POST: PermissionSetting
-        #region 權限設定
-        public ActionResult DoPermissionSetting(DoSettingIn inModel) //宣告Models：StaffSetting裡的類別DoSettingIn及DoSettingrOut
+        #region 權限設定提交資料
+        public ActionResult DoPermissionSetting(DoStaffDataIn inModel)
         {
-            DoSettingrOut outModel = new DoSettingrOut();
+            DoStaffDataOut outModel = new DoStaffDataOut();
 
             if (string.IsNullOrEmpty(inModel.UserName) || string.IsNullOrEmpty(inModel.StaffNumber) || string.IsNullOrEmpty(inModel.Email))
             {
@@ -198,7 +204,7 @@ namespace LDBS.Controllers
                         // 使用參數化填值
                         cmd.Parameters.AddWithValue("@StaffNumber", inModel.StaffNumber);
                         cmd.Parameters.AddWithValue("@UserName", inModel.UserName);
-                        cmd.Parameters.AddWithValue("@UserPassword", strNum + inModel.StaffNumber); //密碼預設Aa+員編(帳號)
+                        cmd.Parameters.AddWithValue("@UserPassword", strNum + inModel.StaffNumber); //密碼預設
                         cmd.Parameters.AddWithValue("@Email", inModel.Email);
                         cmd.Parameters.AddWithValue("@Titile", inModel.Titile);
                         cmd.Parameters.AddWithValue("@Permission", inModel.Permission);
