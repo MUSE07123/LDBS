@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace LDBS.Models
 {
@@ -65,5 +66,35 @@ namespace LDBS.Models
 
             return DeathRosterlist;
         }
+
+        public List<DeathRosterSQL> SetRemarkChange(string ID, string Remark)
+        {
+            List<DeathRosterSQL> DeathRosterlist = new List<DeathRosterSQL>();
+
+            //1.新建連接對象
+            SqlConnection connection = new SqlConnection();
+            //2.連接字串
+            connection.ConnectionString = @"Data Source=.\MSSQLSERVER_2019;Initial Catalog=LDBS ;Integrated Security=SSPI;";
+            //查詢LDBS_DeathRoster資料表的ID
+            SqlCommand sqlCommand = new SqlCommand("UPDATE LDBS_DeathRoster SET Remark = @Remark where ID = @ID");
+            sqlCommand.Connection = connection;
+            connection.Open(); //開資料庫
+
+            // 使用參數化填值
+            sqlCommand.Parameters.AddWithValue("@ID", ID);
+            sqlCommand.Parameters.AddWithValue("@Remark", Remark);
+
+            // 執行資料庫查詢動作
+            SqlDataAdapter da = new SqlDataAdapter(sqlCommand);      //查詢資料
+            DataSet Ds = new DataSet();
+            da.Fill(Ds);
+
+            //關閉連線
+            connection.Close();
+            connection.Dispose();
+
+            return DeathRosterlist;
+        }
+
     }
 }

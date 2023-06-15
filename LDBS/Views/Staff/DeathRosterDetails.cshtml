@@ -1,0 +1,101 @@
+﻿@using LDBS.Models;
+@{
+    ViewBag.Title = "DeathRosterDetails";
+    List<DeathRosterSQL> deathRosterList = ViewBag.deathRosterlist;
+    var id = ViewBag.id;
+
+}
+<style>
+    .cont {
+        display: none;
+        position: fixed;
+        top: 25%;
+        left: 37%;
+        width: 25%;
+        height: 30%;
+        padding: 10px;
+        border: 5px solid #ddd;
+        background-color: lightblue;
+        z-index: 1;
+        overflow: auto;
+    }
+</style>
+
+<h2>DeathRosterDetails</h2>
+<div style="margin:auto">
+    <!--讀取生死簿名冊資料-->
+    @foreach (DeathRosterSQL deathRosterSQL in deathRosterList)
+    {
+        <!--只顯示前頁選擇的人的全部資料 rowid為序號-->
+        if (deathRosterSQL.ID == id)
+        {
+            <table style="width: 500px; margin-left: auto; margin-right: auto">
+
+                <tr align="center" style="font-weight: bold; border-bottom-style: solid; border-width: 1px">
+                    <td colspan="2">序號</td>
+                    <td colspan="3">身分證</td>
+                    <td colspan="3">姓名</td>
+                    <td colspan="2">性別</td>
+                </tr>
+                <tr align="center" style="font-weight: bold">
+                    <td colspan="2">@deathRosterSQL.ROWID</td>
+                    <td colspan="3">@deathRosterSQL.ID</td>
+                    <td colspan="3">@deathRosterSQL.Name</td>
+                    <td colspan="2">@deathRosterSQL.Gender</td>
+                </tr>
+                <tr style="height:40px"></tr>
+                <tr align="center" style="font-weight: bold; border-bottom-style: solid; border-width: 1px">
+                    <td colspan="3">年齡(享年)</td>
+                    <td colspan="3">死亡原因</td>
+                    <td colspan="4">死亡地點</td>
+                </tr>
+                <tr align="center" style="font-weight: bold">
+                    <td colspan="3">@deathRosterSQL.Age</td>
+                    <td colspan="3">@deathRosterSQL.Death_cause</td>
+                    <td colspan="4">@deathRosterSQL.Drath_location</td>
+                </tr>
+                <tr style="height:40px"></tr>
+                <tr align="center" style="font-weight: bold; border-bottom-style: solid; border-width: 1px">
+                    <td colspan="4">出生日期</td>
+                    <td colspan="4">死亡日期</td>
+                    <td colspan="2">狀態</td>
+                </tr>
+                <tr align="center" style="font-weight:bold">
+                    <td colspan="4">@(@deathRosterSQL.Birth_Date.ToString("yyyy/MM/dd HH:mm:ss"))</td>
+                    <td colspan="4">@(@deathRosterSQL.Death_Date.ToString("yyyy/MM/dd HH:mm:ss"))</td>
+                    <td colspan="2">@deathRosterSQL.State</td>
+                </tr>
+                <tr style="height:40px"></tr>
+                <tr align="center" style="font-weight: bold; border-bottom-style: solid; border-width: 1px">
+                    <td colspan="2"></td>
+                    <td colspan="6">備註</td>
+                    <td colspan="2"><button type="button" class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="document.getElementById('remark').style.display='block'">編輯</button></td>
+                </tr>
+                <tr align="center" style="font-weight:bold">
+                    <td colspan="10"><textarea disabled style="resize: none; width: 900px; height: 100px; margin-top: 5px">@deathRosterSQL.Remark</textarea></td>
+                </tr>
+
+
+            </table>
+
+            <!--編輯備註的彈出視窗-->
+            <div id="remark" class="cont" align="center">
+                @using (Html.BeginForm("DeathRosterDetails", "Staff", FormMethod.Post))
+                {
+                    <p><textarea style="resize: none; width: 80%; height: 160px;" name="remarkchange">@deathRosterSQL.Remark</textarea></p>
+                    <button type="reset" onclick="document.getElementById('remark').style.display='none'" style="overflow:auto">關閉</button>
+                    <input type="submit" value="儲存">
+                }
+            </div>
+        }
+    }
+
+</div>
+<div style="text-align: center;margin-top:10px"><button onclick="location.href='@Url.Action("DeathRoster","Staff")'">返回</button></div>
+
+@ViewBag.Msg
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+@*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>*@

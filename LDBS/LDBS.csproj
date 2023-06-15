@@ -174,6 +174,7 @@
     <Content Include="Views\Staff\DeathRoster.cshtml" />
     <Content Include="Views\Staff\PermissionList.cshtml" />
     <Content Include="Views\Staff\PermissionSetting.cshtml" />
+    <Content Include="Views\Staff\DeathRosterDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

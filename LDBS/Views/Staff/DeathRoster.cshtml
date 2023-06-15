@@ -8,49 +8,41 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th></th>
-            <th>序號</th>
-            <th>身分證</th>
-            <th>姓名</th>
-            <th>性別</th>
-            <th>年齡(享年)</th>
-            <th>死亡原因</th>
-            <th>出生日期</th>
-            <th>死亡日期</th>
-            <th>死亡地點</th>
-            <th>狀態</th>
-            <th>備註</th>
-            <th></th>
+        <tr align="center" style="font-weight:bold">
+            <td></td>
+            <td>序號</td>
+            <td>身分證</td>
+            <td>姓名</td>
+            <td>性別</td>
+            <td>死亡日期</td>
+            <td>狀態</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
         @foreach (DeathRosterSQL deathRosterSQL in deathRosterList)
         {
-            <tr>
+            <tr align="center" style="font-weight:bold">
                 @if (@deathRosterSQL.State == "未報到")
                 {
                     @*可勾選*@
-                    <th><input type="checkbox"></th>
+                    <td><input type="checkbox"></td>
                 }
                 else
                 {
                     @*不可勾選*@
-                    <th><input type="checkbox" onclick="return false" disabled></th>
+                    <td><input type="checkbox" onclick="return false" disabled></td>
                 }
-                <th>@deathRosterSQL.ROWID</th>
-                <th>@deathRosterSQL.ID</th>
-                <th>@deathRosterSQL.Name</th>
-                <th>@deathRosterSQL.Gender</th>
-                <th>@deathRosterSQL.Age</th>
-                <th>@deathRosterSQL.Death_cause</th>
-                <th>@(@deathRosterSQL.Birth_Date.ToString("yyyy/MM/dd HH:mm:ss"))</th>
-                <th>@(@deathRosterSQL.Death_Date.ToString("yyyy/MM/dd HH:mm:ss"))</th>
-                <th>@deathRosterSQL.Drath_location</th>
-                <th>@deathRosterSQL.State</th>
-                <th>@deathRosterSQL.Remark</th>
-                <th></th>
+                <td>@deathRosterSQL.ROWID</td>
+                <td>@deathRosterSQL.ID</td>
+                <td>@deathRosterSQL.Name</td>
+                <td>@deathRosterSQL.Gender</td>
+                <td>@(@deathRosterSQL.Death_Date.ToString("yyyy/MM/dd HH:mm:ss"))</td>
+                <td>@deathRosterSQL.State</td>
+                <td><button onclick="location.href='@Url.Action("DeathRosterDetails","Staff", new { ID = deathRosterSQL.ID})'">詳細</button></td>
             </tr>
         }
     </tbody>
 </table>
+
+<div style="text-align: center"><input type="button" onclick="" value="送出"></div>
